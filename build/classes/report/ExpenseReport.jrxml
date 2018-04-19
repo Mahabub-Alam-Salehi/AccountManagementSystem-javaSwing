@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67b99b8c-7286-4fc6-b8a8-8a17d349ed6c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="start_date" class="java.lang.String"/>
+	<parameter name="end_date" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     expense.`expense_date` AS expense_expense_date,
+     expense.`expense_type` AS expense_expense_type,
+     expense.`amount` AS expense_amount,
+     expense.`note` AS expense_note
+FROM
+     `expense` expense
+where expense_date between $P{start_date} and $P{end_date}]]>
+	</queryString>
+	<field name="expense_expense_date" class="java.sql.Date"/>
+	<field name="expense_expense_type" class="java.lang.String"/>
+	<field name="expense_amount" class="java.lang.Float"/>
+	<field name="expense_note" class="java.lang.String"/>
+	<variable name="total_amount" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{expense_amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="433" height="23" forecolor="#0066FF" uuid="a3a5d2d9-ab14-44db-8505-83a65aab4adf"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Expense Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="43" width="73" height="20" uuid="fecf86ed-0d6a-47d0-910b-507c2f3287ec"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[From Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="43" width="54" height="20" uuid="4ccb7cdd-57dc-4f25-9e32-8c9ceebe27ff"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[To Date:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="433" y="0" width="122" height="79" uuid="e68b6e79-c5f8-4f28-9cf7-987377bf86a9"/>
+				<imageExpression><![CDATA["E:\\AMS\\AccountManagementSystem\\src\\report\\jaba.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="85" y="43" width="88" height="20" uuid="c8d69854-4b05-4846-9a96-73f892321a9e"/>
+				<textFieldExpression><![CDATA[$P{start_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="43" width="88" height="20" uuid="6fb9ddb9-4a55-4037-8809-6015f76ee45f"/>
+				<textFieldExpression><![CDATA[$P{end_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="129" height="20" uuid="6ee1d77c-452f-4fae-aebf-7165012d52e0"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="2" width="100" height="20" uuid="b2e699ca-f0d9-46a8-87ca-d28ddff4080f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Expense Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="259" y="2" width="122" height="20" uuid="2b123793-2fbb-4dd1-ab81-01f94fcf9094"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Note]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="0" width="124" height="20" uuid="180561e2-1e5b-4c57-82b0-5bf174a9644f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="0" y="0" width="129" height="20" uuid="3ee3d992-019a-4ae2-a760-9a3d01fed498"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{expense_expense_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="143" y="0" width="100" height="20" uuid="18753d30-cc24-4b13-9075-5f03240733bb"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{expense_expense_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="259" y="0" width="122" height="20" uuid="164c3c31-3384-466c-903e-2d843a08b6fd"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{expense_note}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="0" width="124" height="20" uuid="31a98bc8-3cf5-475e-94ac-738a0da1c6e9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{expense_amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="404" y="0" width="124" height="20" uuid="d44831ba-f6b2-4a01-8bad-bb9194623d55"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{total_amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="281" y="0" width="100" height="20" uuid="c5995f98-3cca-44e8-8136-0b89d00d13c9"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Total Amount:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="5923511f-f980-4958-8783-bd6af762dec9"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

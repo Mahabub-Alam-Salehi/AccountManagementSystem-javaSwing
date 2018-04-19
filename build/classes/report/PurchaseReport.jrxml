@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="adbb2c2e-73cb-48e2-b2c0-05e5ff37fcaf">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="start_date" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="end_date" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT
+     purchases.`date` AS purchases_date,
+     purchases.`vendor_name` AS purchases_vendor_name,
+     purchases.`vendor_address` AS purchases_vendor_address,
+     purchases.`vendor_phone` AS purchases_vendor_phone,
+     purchases.`product_code` AS purchases_product_code,
+     purchases.`product_name` AS purchases_product_name,
+     purchases.`quantity` AS purchases_quantity,
+     purchases.`unit_price` AS purchases_unit_price,
+     purchases.`total` AS purchases_total
+FROM
+     `purchases` purchases
+WHERE
+     date BETWEEN $P{start_date}and$P{end_date}
+ AND debit IS NOT NULL]]>
+	</queryString>
+	<field name="purchases_date" class="java.sql.Date"/>
+	<field name="purchases_vendor_name" class="java.lang.String"/>
+	<field name="purchases_vendor_address" class="java.lang.String"/>
+	<field name="purchases_vendor_phone" class="java.lang.String"/>
+	<field name="purchases_product_code" class="java.lang.String"/>
+	<field name="purchases_product_name" class="java.lang.String"/>
+	<field name="purchases_quantity" class="java.lang.Integer"/>
+	<field name="purchases_unit_price" class="java.lang.Float"/>
+	<field name="purchases_total" class="java.lang.Float"/>
+	<variable name="total_purchase_price" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{purchases_total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="672" height="29" forecolor="#0066FF" uuid="4002d8eb-2ec7-4161-a6b1-1a9865bae545"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Purchase Report]]></text>
+			</staticText>
+			<image>
+				<reportElement x="672" y="0" width="130" height="89" uuid="c1ccfad0-775c-4097-a9c3-2c28ca7d4a24"/>
+				<imageExpression><![CDATA["E:\\AMS\\AccountManagementSystem\\src\\report\\jaba.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="41" width="71" height="23" uuid="0e84a3bc-2a5e-42b6-a1d4-e65b904985c3"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[From Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="44" width="56" height="20" uuid="4e84e941-7ecc-468e-8384-179774ba78e7"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[To Date:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="82" y="44" width="100" height="20" uuid="f391cfce-569e-40cf-abed-174a17cf2c9e"/>
+				<textFieldExpression><![CDATA[$P{start_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="508" y="44" width="100" height="20" uuid="dca3c4ff-b674-4aa5-88aa-16374554a5dd"/>
+				<textFieldExpression><![CDATA[$P{end_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="85" height="20" uuid="80266d91-1e93-4310-97ca-bce0be47f7d2"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Purchases Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="82" height="20" uuid="56e4fde2-1b71-42a6-90f5-c55114b62e59"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Vendor Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="203" y="2" width="80" height="20" uuid="04958e9f-4307-4c26-9be0-e56d57104506"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Vendor Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="2" width="81" height="20" uuid="0c760821-8665-44b6-825d-f10cf5a01d3d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Vendor Phone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="2" width="71" height="20" uuid="23ecef48-a182-4637-b7b2-9b1f5807f56c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Product Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="2" width="79" height="20" uuid="5a2c46bc-9bd4-4ac9-9aad-035b1f33b0b5"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Product Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="579" y="2" width="51" height="20" uuid="05ea3cb6-ad0e-4561-bf31-8cfeb274cb39"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="648" y="2" width="73" height="20" uuid="90e66b07-2f6d-438a-87d0-8b0f4a662a7d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Unit  Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="731" y="2" width="71" height="20" uuid="22ba54ff-7731-4704-9cfb-1b2437ba4cd7"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="0" y="0" width="85" height="20" uuid="67f25bf4-cde2-4d5f-842e-ea228ecee8f9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{purchases_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="82" height="20" uuid="a56e87c8-9c8c-4e00-9c22-4bbc1566de5c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{purchases_vendor_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="203" y="0" width="80" height="20" uuid="2b420a31-778c-49bd-8668-7a1fcb729197"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{purchases_vendor_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="81" height="20" uuid="e8ea2d4a-3423-4476-869a-532f9d90a65e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{purchases_vendor_phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="0" width="71" height="20" uuid="538d7d28-ae15-4197-9592-07f3797b1041"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{purchases_product_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="3" width="79" height="20" uuid="ce5eb4aa-5470-4a25-8c70-7908b12fcee8"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{purchases_product_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="579" y="3" width="51" height="20" uuid="8028c8bf-c78b-433b-8277-eb47f8922ea9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{purchases_quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="648" y="3" width="72" height="20" uuid="7714b6fd-2984-4fbc-9d87-16412f1d65e6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{purchases_unit_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="731" y="0" width="71" height="20" uuid="fe8642a0-d25f-4e12-a895-136b6d5b0aec"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{purchases_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="731" y="0" width="71" height="20" uuid="898d64e4-aa9a-4a96-b80b-ffd980ded193"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{total_purchase_price}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="608" y="0" width="112" height="20" uuid="49d1a983-ca16-4f0c-ac63-519d3752f68a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Total Purchase Price:
+]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="bc189f98-a536-4b78-91b4-9776f228ed44"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

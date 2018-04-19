@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad107fd0-f219-4bc3-8c67-26ea2da04003">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="start_date" class="java.lang.String"/>
+	<parameter name="end_date" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     general.`date` AS general_date,
+     general.`type` AS general_type,
+     general.`description` AS general_description,
+     general.`amount` AS general_amount
+FROM
+     `general` general
+where date between $P{start_date} and $P{end_date}]]>
+	</queryString>
+	<field name="general_date" class="java.sql.Date"/>
+	<field name="general_type" class="java.lang.String"/>
+	<field name="general_description" class="java.lang.String"/>
+	<field name="general_amount" class="java.lang.Float"/>
+	<variable name="total_general" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{general_amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="444" height="23" forecolor="#0066FF" uuid="c1c893ca-47f5-499b-b691-b9a71dfa22c3"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[General Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="33" width="70" height="20" uuid="5a7400a3-872b-45f1-b8d3-e1255792a4c1"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[From Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="33" width="58" height="20" uuid="d2d917b9-8370-40a1-ae95-c4487538dbd5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[To Date:
+]]></text>
+			</staticText>
+			<image>
+				<reportElement x="444" y="0" width="111" height="79" uuid="a6459ddd-8399-4dab-9a01-24894391a776"/>
+				<imageExpression><![CDATA["E:\\AMS\\AccountManagementSystem\\src\\report\\jaba.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="86" y="33" width="100" height="20" uuid="c9533b5c-c5a9-4cf2-bc02-7452f62581de"/>
+				<textFieldExpression><![CDATA[$P{start_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="343" y="33" width="85" height="20" uuid="4239b6a6-5b0e-4956-8bd2-8ae3086bf287"/>
+				<textFieldExpression><![CDATA[$P{end_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="865971f4-4c1e-4145-b050-9591f2aeedf1"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="119" y="0" width="117" height="20" uuid="5fc64b41-5993-4b71-a8da-abdbfbcb1ca9"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="259" y="0" width="150" height="20" uuid="08b8e4e6-b3bc-4577-b9bf-d2d0ae574273"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="0" width="117" height="20" uuid="cd3b4c6d-d423-4b4a-ac95-c35db86b8384"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="0" y="0" width="100" height="20" uuid="975908bf-451f-4136-813b-d0ab360f9fac"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{general_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="0" width="117" height="20" uuid="de5e5341-b1c8-4202-9160-f380d2692d2b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{general_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="259" y="0" width="150" height="20" uuid="b25c29f9-7a43-401f-97bc-cc8681c3eecc"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{general_description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="428" y="0" width="117" height="20" uuid="cd0e0fec-fa82-4807-8c38-26ecc8c69676"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{general_amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="428" y="0" width="117" height="20" uuid="0bb29fab-3092-4f54-80e6-dcdd6318af7f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{total_general}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="309" y="0" width="100" height="20" uuid="91ce372f-36ce-4aa1-b1d3-498ae6ceaa2d"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Total Amount:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="cc4b0363-74b1-436f-bcae-f12cf1cad805"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
